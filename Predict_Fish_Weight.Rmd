@@ -82,15 +82,34 @@ Using the above chart, we can see that the best regression models are Height and
 
 ## Pike
 
-
+```{r}
+fullup <- lm(Weight~ .,data=Pike)
+summary.lm(fullup)
+```
 
 ### Best Models
-
-
+  
+This chart's best model is the L1-L2L-L3, Height and Weight measurement. This has an estimated Asjusted R Sqaure is 0.9794.
 
 ### Best Two regressor model
 
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Pike,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
 
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="topleft",main="Adjusted R^2")
+```
+  
+The best two element model on the given chart is L1-L3, with an Adjusted R Squared number of 0.0965. 
 
 ## Roach
 
