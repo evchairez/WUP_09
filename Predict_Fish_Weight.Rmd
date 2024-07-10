@@ -113,15 +113,33 @@ The best two element model on the given chart is L1-L3, with an Adjusted R Squar
 
 ## Roach
 
+```{r}
+fullup <- lm(Weight~ .,data=Roach)
+summary.lm(fullup)
+```
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Roach,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
 
-
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomleft",main="Adjusted R^2")
+```
+  
 ### Best Models
-
-
-
+  
+This chart provides that the best overall model is L3 and Width.
+  
 ### Best Two regressor model
 
-
+The best two regressor model is also L3 and Width. The Adjusted R squared is 0.821.
 
 ## Final Summary Statements
 
