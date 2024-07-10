@@ -51,21 +51,59 @@ Whitefish <- select(Whitefish, -Species)
 
 ## Perch
 
+```{r}
+fullup <- lm(Weight~ .,data=Perch)
+summary.lm(fullup)
+```
+
 ### Best Models
+
+The data for the Adjusted Squared has a best model for Length1. We can determine this summary has a p-value of 2.2e-16.
 
 ### Best Two regressor model
 
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Perch,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
+
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+library(car)
+subsets(regsubsets.out,statistic="adjr2",legend="bottom",main="Adjusted R^2")
+```
+  
+Using the above chart, we can see that the best regression models are Height and Weight. This model is the best for the Perch data, as well as for the two element model.
 
 ## Pike
 
+
+
 ### Best Models
 
+
+
 ### Best Two regressor model
+
+
 
 ## Roach
 
+
+
 ### Best Models
+
+
 
 ### Best Two regressor model
 
+
+
 ## Final Summary Statements
+
+
