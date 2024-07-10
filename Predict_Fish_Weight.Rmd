@@ -1,6 +1,6 @@
 ---
 title: "Weight of Fish"
-author: "Your Name"
+author: "Evelyn Chairez / Summer 2024"
 date: "`r Sys.Date()`"  
 output: 
   html_document:
